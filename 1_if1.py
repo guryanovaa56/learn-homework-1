@@ -14,12 +14,31 @@
 
 """
 
+
+
+def get_position(age):
+      if age < 7:
+        result = 'учится в детском саду'
+      
+      if age >= 7 and age <= 18:
+        result = 'учится в школе'
+      
+      if age >= 18 and age <= 23:
+        result = 'учится в вузе'
+      
+      else:
+        result = 'работает'
+      print(result)  
+
 def main():
     """
     Эта функция вызывается автоматически при запуске скрипта в консоли
     В ней надо заменить pass на ваш код
     """
-    pass
+    input_age = int(input('Введите ваш возраст:'))
+    get_position(input_age)
+    
 
+  
 if __name__ == "__main__":
     main()
