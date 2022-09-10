@@ -15,26 +15,27 @@
 
 """
 def check_str(str1, str2):
-    if type(str1) is not str or type(str2) is not str:
-        return '0'
-    elif str1 == str2:
-        return '1'
-    elif len(str1) > len(str2) :
-        return '2'
-    elif str1 != str2 and str2 == 'learn':
-        return '3'
-
+    if not isinstance(str1, str) or not isinstance(str2, str):
+        return 0
+    
+    if str1 == str2:
+        return 1
+    
+    if len(str1) > len(str2) :
+        return 2
+    
+    if str1 != str2 and str2 == 'learn':
+        return 3
+    
+    return None
 
 def main():
-    str1 = 'test'
-    # str2 = 'test_test'
-    # str2 = "2"
-    #str2 = 2
-    str2 = 'learn'
-    
-    print(check_str(str1, str2))
-
-
+    assert check_str('test', 'learn') == 3
+    assert check_str(2, 3) == 0
+    assert check_str('test', 'test') == 1
+    assert check_str('long_test', 'test') == 2
+    assert check_str('test', 'long_test') == None
+     
     
 if __name__ == "__main__":
     main()
