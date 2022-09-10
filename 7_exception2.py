@@ -13,14 +13,30 @@
     
 """
 
-def discounted(price, discount, max_discount=20)
+def discounted(price, discount, max_discount=20):
     """
     Замените pass на ваш код
     """
-    pass
+    try:
+        if(not type(price) is int or not type(discount) is int or not type(max_discount) is int):
+            raise TypeError('Агрументы должны быть числами')
+        else:
+            price = abs(float(price))
+            discount = abs(float(discount))
+            max_discount = abs(float(max_discount))
+            if max_discount > 99:
+                raise ValueError('Слишком большая максимальная скидка')
+            if discount >= max_discount:
+                return price
+            else:
+                return price - (price * discount / 100)
+    except TypeError as not_int:
+        print(not_int)
+    except ValueError as big_discount:
+        print(big_discount)
     
 if __name__ == "__main__":
-    print(discounted(100, 2))
+    print(discounted(100, 3,100))
     print(discounted(100, "3"))
     print(discounted("100", "4.5"))
     print(discounted("five", 5))
