@@ -10,31 +10,38 @@
 * Первые два нужно приводить к вещественному числу при помощи float(),
   а третий - к целому при помощи int() и перехватывать исключения
   ValueError и TypeError, если приведение типов не сработало.
-    
+
 """
+class AppError(Exception):
+    """Application Error."""
+
+
+class MaxDiscountError(AppError):
+    """Maximum Discount over 99"""
+
 
 def discounted(price, discount, max_discount=20):
     """
     Замените pass на ваш код
     """
     try:
-        if(not type(price) is int or not type(discount) is int or not type(max_discount) is int):
-            raise TypeError('Агрументы должны быть числами')
-        else:
-            price = abs(float(price))
-            discount = abs(float(discount))
-            max_discount = abs(float(max_discount))
-            if max_discount > 99:
-                raise ValueError('Слишком большая максимальная скидка')
-            if discount >= max_discount:
-                return price
-            else:
-                return price - (price * discount / 100)
-    except TypeError as not_int:
-        print(not_int)
-    except ValueError as big_discount:
-        print(big_discount)
-    
+        price = abs(float(price))
+        discount = abs(float(discount))
+        max_discount = abs(float(max_discount))
+    except TypeError:
+        raise AppError('Агрументы должны быть числами')
+    except ValueError:
+        raise AppError('Args must be float')
+
+    if max_discount > 99:
+
+        raise AppError('Слишком большая максимальная скидка')
+    if discount >= max_discount:
+        return price
+    else:
+        return price - (price * discount / 100)
+
+
 if __name__ == "__main__":
     print(discounted(100, 3,100))
     print(discounted(100, "3"))
